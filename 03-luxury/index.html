@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0e0b0d">
+  <meta name="description" content="Beauty Salon — a private, by-appointment spa for women in Kuala Lumpur. See prices, durations and live availability, then reserve in one message.">
+  <meta name="author" content="Niagova">
+  <title>Beauty Salon | The hour that is entirely yours</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=__BUILD_VERSION__">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+  <div class="notice">
+    <span>Private suites · by appointment only · Kampung Pandan, Kuala Lumpur</span>
+    <span class="notice-live"><i></i>Live availability shown online — no need to ask</span>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="Beauty Salon home">
+        <span class="monogram" aria-hidden="true">BS</span>
+        <span class="brand-name">Beauty Salon<small>Spa &amp; Beauty Atelier</small></span>
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
+        <a href="#menu">The menu</a>
+        <a href="#availability">Availability</a>
+        <a href="#rituals">Signature rituals</a>
+        <a href="#house">The house</a>
+        <a href="#membership">Membership</a>
+        <a href="#location">Visit</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="button button-gold" href="#reserve">Reserve</a>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Open navigation"><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero-media" id="heroMedia">
+        <img class="is-active" src="images/lux-hero-suite.webp" alt="A woman resting with eyes closed in a candlelit private spa suite finished in black, gold and plum">
+        <img src="images/lux-gold-facial.webp" alt="A therapist applying a shimmering gold facial mask in a dark, candlelit suite">
+        <img src="images/beauty-hero-facial-v3.webp" alt="A client enjoying a gentle facial massage in a serene beauty lounge">
+      </div>
+      <div class="hero-frame" aria-hidden="true"></div>
+      <div class="wrap hero-wrap">
+        <div class="hero-copy">
+          <p class="eyebrow"><span>✦</span> Beauty Salon · Est. for women who value their time</p>
+          <h1 class="display">The hour that is <em>entirely yours.</em></h1>
+          <p class="lead">A private spa and beauty atelier where every treatment, price and open slot is already answered here — so your only task is to arrive.</p>
+          <div class="hero-actions">
+            <a class="button button-gold" href="#reserve">Reserve a ritual</a>
+            <a class="button button-ghost" href="#availability">See today's availability</a>
+          </div>
+          <ul class="hero-promises" aria-label="What to expect">
+            <li><strong>Prices &amp; durations</strong><span>Published, never a surprise</span></li>
+            <li><strong>Open slots</strong><span>Updated live, no asking</span></li>
+            <li><strong>One message</strong><span>Your booking, pre-written</span></li>
+          </ul>
+        </div>
+        <aside class="live-card reveal" aria-live="polite">
+          <div class="live-card-head"><span class="pulse" aria-hidden="true"></span><span>Availability today</span><time id="liveClock"></time></div>
+          <strong class="live-count"><span id="liveOpenCount">—</span> suites open</strong>
+          <ul class="live-slots" id="liveSlots"></ul>
+          <a class="live-link" href="#availability">View the full week →</a>
+        </aside>
+      </div>
+      <div class="hero-dots" id="heroDots" role="group" aria-label="Choose a hero scene"></div>
+      <a class="scroll-cue" href="#marquee" aria-label="Scroll down"><span></span></a>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee" id="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Gold Hour Facial</span><i>✦</i><span>Stone &amp; Silence</span><i>✦</i><span>Lash &amp; Brow Atelier</span><i>✦</i><span>Hands &amp; Feet</span><i>✦</i><span>Bridal Suite</span><i>✦</i><span>Hair Spa</span><i>✦</i>
+        <span>Gold Hour Facial</span><i>✦</i><span>Stone &amp; Silence</span><i>✦</i><span>Lash &amp; Brow Atelier</span><i>✦</i><span>Hands &amp; Feet</span><i>✦</i><span>Bridal Suite</span><i>✦</i><span>Hair Spa</span><i>✦</i>
+      </div>
+    </div>
+
+    <!-- PHILOSOPHY -->
+    <section class="philosophy">
+      <div class="wrap philosophy-grid">
+        <div class="philosophy-copy reveal">
+          <p class="eyebrow">Our promise</p>
+          <h2 class="display">Everything you would normally ask, <em>already answered.</em></h2>
+          <p>Most spa enquiries are the same three questions: how much, how long, and when. We publish all three. Browse the menu, check the week's open suites, and reserve with a message that is already written for you.</p>
+        </div>
+        <div class="philosophy-stats reveal">
+          <div class="stat"><strong data-count="3">0</strong><span>questions answered before you message</span></div>
+          <div class="stat"><strong data-count="7">0</strong><span>days of availability visible</span></div>
+          <div class="stat"><strong data-count="1">0</strong><span>message to confirm your hour</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENU -->
+    <section class="menu" id="menu">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><p class="eyebrow">The menu</p><h2 class="display">Treatments, priced and timed.</h2></div>
+          <p class="lead">Every ritual lists its duration and price so you can plan your visit with confidence. Tap a treatment to see what is included.</p>
+        </div>
+        <div class="menu-tabs reveal" role="tablist" aria-label="Treatment categories" id="menuTabs"></div>
+        <div class="menu-list reveal" id="menuList"></div>
+        <p class="fine-print">Illustrative proposal prices in Malaysian Ringgit. Replace with the atelier's confirmed menu before launch.</p>
+      </div>
+    </section>
+
+    <!-- AVAILABILITY -->
+    <section class="availability" id="availability">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><p class="eyebrow">Live availability</p><h2 class="display">Choose your hour <em>without asking.</em></h2></div>
+          <p class="lead">The board below shows open, limited and fully booked hours for the next seven days. Select a slot and it flows straight into your reservation.</p>
+        </div>
+        <div class="board reveal">
+          <div class="board-days" id="boardDays" role="tablist" aria-label="Choose a day"></div>
+          <div class="board-body">
+            <div class="board-meta">
+              <span id="boardDayLabel"></span>
+              <span class="legend"><i class="open"></i>Open <i class="limited"></i>Limited <i class="full"></i>Full</span>
+            </div>
+            <div class="board-slots" id="boardSlots"></div>
+            <p class="board-note">Demo schedule generated in the browser. In production this reads from the atelier's booking calendar and updates automatically.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SIGNATURE RITUALS -->
+    <section class="rituals" id="rituals">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><p class="eyebrow">Signature rituals</p><h2 class="display">Three ways to disappear for a while.</h2></div>
+          <div class="scroller-nav"><button type="button" id="ritualPrev" aria-label="Previous ritual">←</button><button type="button" id="ritualNext" aria-label="Next ritual">→</button></div>
+        </div>
+      </div>
+      <div class="ritual-scroller reveal" id="ritualScroller">
+        <article class="ritual-card">
+          <img src="images/lux-gold-facial.webp" alt="Gold-leaf facial mask being applied by candlelight" loading="lazy">
+          <div class="ritual-overlay">
+            <small>01 · Face</small>
+            <h3 class="display">The Gold Hour Facial</h3>
+            <p>Lymphatic sculpting, 24k gold-leaf mask and a scalp release to finish.</p>
+            <div class="ritual-meta"><span>75 min</span><span>RM 388</span></div>
+            <a class="button button-gold" href="#reserve" data-select-service="The Gold Hour Facial">Reserve this ritual</a>
+          </div>
+        </article>
+        <article class="ritual-card">
+          <img src="images/lux-stone-ritual.webp" alt="Warm basalt stones placed along the back during a massage" loading="lazy">
+          <div class="ritual-overlay">
+            <small>02 · Body</small>
+            <h3 class="display">Stone &amp; Silence</h3>
+            <p>Warm basalt stones, slow pressure and a phone-free suite for ninety minutes.</p>
+            <div class="ritual-meta"><span>90 min</span><span>RM 428</span></div>
+            <a class="button button-gold" href="#reserve" data-select-service="Stone & Silence">Reserve this ritual</a>
+          </div>
+        </article>
+        <article class="ritual-card">
+          <img src="images/beauty-bridal-v2.webp" alt="A bride receiving refined occasion makeup" loading="lazy">
+          <div class="ritual-overlay">
+            <small>03 · Occasion</small>
+            <h3 class="display">The Bridal Suite</h3>
+            <p>A private suite for the bride and two companions: skin prep, hair and makeup.</p>
+            <div class="ritual-meta"><span>Half day</span><span>From RM 1,280</span></div>
+            <a class="button button-gold" href="#reserve" data-select-service="The Bridal Suite">Enquire for a date</a>
+          </div>
+        </article>
+        <article class="ritual-card">
+          <img src="images/beauty-hero-hair-v3.webp" alt="A stylist shaping glossy waves for a relaxed client" loading="lazy">
+          <div class="ritual-overlay">
+            <small>04 · Hair</small>
+            <h3 class="display">Silk Hair Spa</h3>
+            <p>Scalp detox, keratin-silk infusion and a glossy blow-out before you leave.</p>
+            <div class="ritual-meta"><span>60 min</span><span>RM 268</span></div>
+            <a class="button button-gold" href="#reserve" data-select-service="Silk Hair Spa">Reserve this ritual</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- THE HOUSE -->
+    <section class="house" id="house">
+      <div class="wrap house-grid">
+        <div class="house-gallery reveal">
+          <img class="house-main" src="images/lux-lounge-interior.webp" alt="The atelier's intimate reception lounge with plum velvet chairs and brass mirror" loading="lazy">
+          <figure class="house-portrait">
+            <img src="images/lux-therapist-portrait.webp" alt="A senior therapist in a black uniform with a gold pin" loading="lazy">
+            <figcaption><strong>Aisyah Rahman</strong><span>Senior therapist · 11 years</span></figcaption>
+          </figure>
+        </div>
+        <div class="house-copy reveal">
+          <p class="eyebrow">The house</p>
+          <h2 class="display">Private suites. <em>Quiet rules.</em></h2>
+          <p>Every room is a closed suite with its own shower and dressing area. Female therapists only. No walk-ins, no waiting room noise, no phone calls during your hour.</p>
+          <div class="accordion" id="houseFaq">
+            <details open>
+              <summary>When should I arrive?</summary>
+              <p>Ten minutes before your hour. Your suite is prepared from the minute you booked, and we begin on time so the next guest's hour is protected too.</p>
+            </details>
+            <details>
+              <summary>Is the atelier hijab-friendly and private?</summary>
+              <p>Yes. All therapists are women, every suite is fully enclosed, and we provide a private changing area with a lockable door.</p>
+            </details>
+            <details>
+              <summary>What should I wear or bring?</summary>
+              <p>Nothing in particular. Robes, slippers, disposable undergarments and a hair wrap are provided. Arrive without makeup for facials if you can.</p>
+            </details>
+            <details>
+              <summary>Can I reschedule or cancel?</summary>
+              <p>Free changes up to 24 hours before your hour. Inside 24 hours a 50% ritual fee applies, as the suite was held for you.</p>
+            </details>
+            <details>
+              <summary>Pregnancy, sensitivities or medical notes?</summary>
+              <p>Tell us in the reservation note. We adapt pressure, products and positioning, and some treatments have pregnancy-safe alternatives.</p>
+            </details>
+            <details>
+              <summary>Parking and payment</summary>
+              <p>Reserved bays at the rear entrance, validated for two hours. We accept cards, DuitNow QR and e-wallets. No payment is taken online on this demo.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section class="reviews" id="reviews">
+      <div class="wrap">
+        <div class="review-stage reveal">
+          <p class="eyebrow centered">Kind words</p>
+          <div class="stars" aria-label="Five star illustrative rating">★★★★★</div>
+          <div class="quote-slider" id="quoteSlider">
+            <blockquote class="quote active display">“I checked the price, saw Thursday 2 pm was open and booked in one message. No back-and-forth. That alone made it feel luxurious.”<footer>Sample review · replace with a verified Google review</footer></blockquote>
+            <blockquote class="quote display">“The gold facial is unreal, but what I remember is the silence. Ninety minutes where nobody needed anything from me.”<footer>Sample review · replace with a verified Google review</footer></blockquote>
+            <blockquote class="quote display">“As a hijabi I finally found a spa where I can fully relax. Private suite, women only, no awkward questions.”<footer>Sample review · replace with a verified Google review</footer></blockquote>
+          </div>
+          <div class="quote-nav"><button type="button" id="quotePrev" aria-label="Previous review">←</button><span id="quoteCounter">1 / 3</span><button type="button" id="quoteNext" aria-label="Next review">→</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEMBERSHIP -->
+    <section class="membership" id="membership">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><p class="eyebrow">Membership &amp; series</p><h2 class="display">Keep the hour <em>on your calendar.</em></h2></div>
+          <p class="lead">Series pricing rewards the guest who protects her time. Each tier reserves a standing slot so you never have to ask again.</p>
+        </div>
+        <div class="tiers reveal">
+          <article class="tier">
+            <small>Series of three</small>
+            <h3 class="display">The Glow Series</h3>
+            <div class="tier-price"><span>RM</span>998</div>
+            <ul><li>3 × Gold Hour Facial</li><li>Priority weekend slots</li><li>Complimentary scalp release</li></ul>
+            <a class="button button-ghost" href="#reserve" data-select-service="The Glow Series (3 facials)">Begin the series</a>
+          </article>
+          <article class="tier featured">
+            <small>Most reserved</small>
+            <h3 class="display">Monthly Hour</h3>
+            <div class="tier-price"><span>RM</span>328<em>/month</em></div>
+            <ul><li>One 90-minute ritual monthly</li><li>Standing slot, held for you</li><li>15% off all additional rituals</li><li>Guest pass twice a year</li></ul>
+            <a class="button button-gold" href="#reserve" data-select-service="Monthly Hour membership">Hold my slot</a>
+          </article>
+          <article class="tier">
+            <small>For the bride</small>
+            <h3 class="display">Bridal Countdown</h3>
+            <div class="tier-price"><span>From RM</span>2,480</div>
+            <ul><li>6 skin sessions over 12 weeks</li><li>Trial hair &amp; makeup</li><li>Wedding-day suite for three</li></ul>
+            <a class="button button-ghost" href="#reserve" data-select-service="Bridal Countdown programme">Plan the countdown</a>
+          </article>
+        </div>
+        <p class="fine-print">Illustrative proposal tiers. Pricing and inclusions are confirmed by the atelier.</p>
+      </div>
+    </section>
+
+    <!-- RESERVE -->
+    <section class="reserve" id="reserve">
+      <div class="wrap reserve-grid">
+        <div class="reserve-intro reveal">
+          <p class="eyebrow">Reserve</p>
+          <h2 class="display">One message. <em>Your hour, held.</em></h2>
+          <p>Choose a ritual and a slot from the live board. We compose a complete WhatsApp message for you, so the atelier only needs to reply "confirmed".</p>
+          <div class="reserve-summary" id="reserveSummary" aria-live="polite">
+            <div><span>Ritual</span><strong id="sumService">Not chosen yet</strong></div>
+            <div><span>When</span><strong id="sumWhen">Pick a slot on the board</strong></div>
+            <div><span>Duration · price</span><strong id="sumPrice">—</strong></div>
+          </div>
+          <div class="recent" id="recentWrap" hidden>
+            <p class="eyebrow">Your recent reservations on this device</p>
+            <ul id="recentList"></ul>
+          </div>
+        </div>
+        <form class="reserve-form reveal" id="reserveForm" novalidate>
+          <div class="form-grid">
+            <div class="field"><label for="name">Your name</label><input id="name" name="name" required autocomplete="name" placeholder="Full name"></div>
+            <div class="field"><label for="phone">Mobile number</label><input id="phone" name="phone" required autocomplete="tel" inputmode="tel" placeholder="01x-xxx xxxx"></div>
+            <div class="field"><label for="service">Ritual</label><select id="service" name="service" required><option value="">Choose a ritual</option></select></div>
+            <div class="field"><label for="therapist">Preferred therapist</label><select id="therapist" name="therapist"><option>No preference</option><option>Aisyah Rahman</option><option>Mei Lin Tan</option><option>Priya Nair</option></select></div>
+            <div class="field"><label for="date">Date</label><input id="date" name="date" type="date" required></div>
+            <div class="field"><label for="time">Time</label><select id="time" name="time" required><option value="">Choose a time</option></select></div>
+            <div class="field full"><label for="notes">Notes for your therapist</label><textarea id="notes" name="notes" placeholder="Occasion, skin concerns, pregnancy, allergies, or anything we should prepare"></textarea></div>
+          </div>
+          <div class="form-actions">
+            <button class="button button-gold" type="submit">Continue on WhatsApp</button>
+            <button class="button button-ghost" type="button" id="copyEnquiry">Copy the message instead</button>
+          </div>
+          <p class="form-status" id="formStatus" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- LOCATION -->
+    <section class="location" id="location">
+      <div class="wrap location-grid">
+        <div class="location-copy reveal">
+          <p class="eyebrow">Visit</p>
+          <h2 class="display">Behind a quiet door <em>in Kampung Pandan.</em></h2>
+          <address>2A Lorong Delapan, Kampung Pandan<br>55100 Kuala Lumpur</address>
+          <dl class="hours" id="hoursList">
+            <div><dt>Tue – Fri</dt><dd>10:00 – 21:00</dd></div>
+            <div><dt>Sat – Sun</dt><dd>09:00 – 19:00</dd></div>
+            <div><dt>Monday</dt><dd>Closed for the house</dd></div>
+          </dl>
+          <p class="open-now" id="openNow"></p>
+          <div class="hero-actions">
+            <a class="button button-gold" href="https://www.google.com/maps/dir/?api=1&amp;destination=3.144827966176431%2C101.74171596840188" target="_blank" rel="noopener">Get directions</a>
+            <a class="button button-ghost" href="https://wa.me/601158121239?text=Hello%20Beauty%20Salon%2C%20I%27d%20like%20to%20ask%20about%20a%20ritual." target="_blank" rel="noopener">WhatsApp concierge</a>
+          </div>
+        </div>
+        <div class="location-map reveal">
+          <iframe title="Map to Beauty Salon in Kampung Pandan, Kuala Lumpur" src="https://www.google.com/maps?q=3.144827966176431,101.74171596840188&amp;z=16&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- NIAGOVA PITCH -->
+    <section class="pitch" id="for-owners" aria-labelledby="pitch-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><p class="eyebrow">For the atelier owner · website by Niagova</p><h2 class="display" id="pitch-title">Stop typing the same reply <em>forty times a day.</em></h2></div>
+          <p class="lead">“How much?” “How long?” “Got slot Saturday?” This website answers them while you are mid-treatment, and sends you only the message that matters: a complete, ready-to-confirm reservation.</p>
+        </div>
+        <div class="compare reveal">
+          <div class="compare-col before">
+            <h3>Replying by hand</h3>
+            <ul>
+              <li>Every enquiry interrupts a treatment or your evening.</li>
+              <li>Price lists sent as blurry screenshots, out of date within a month.</li>
+              <li>“Is 3 pm free?” — check the diary, reply, they have gone quiet.</li>
+              <li>No-shows because nothing was written down.</li>
+              <li>Clients choose whoever replies first — rarely you.</li>
+            </ul>
+          </div>
+          <div class="compare-col after">
+            <h3>With this web system</h3>
+            <ul>
+              <li>Menu, prices and durations published once, edited in minutes.</li>
+              <li>Live availability board answers “got slot?” 24 hours a day.</li>
+              <li>Reservations arrive as one structured WhatsApp message with name, ritual, date and time.</li>
+              <li>House rules and FAQs answered before the first message.</li>
+              <li>A premium first impression that justifies premium pricing.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pitch-metrics reveal">
+          <div><strong data-count="70" data-suffix="%">0</strong><span>of routine enquiries deflected to the menu and board (illustrative)</span></div>
+          <div><strong data-count="24" data-suffix="/7">0</strong><span>answering availability while the atelier sleeps</span></div>
+          <div><strong data-count="1">0</strong><span>yearly managed plan: hosting, edits and support</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<section class="niagova-band" aria-labelledby="niagova-title">
+  <div class="niagova-band-inner">
+    <div>
+      <img src="images/niagova-logo-on-dark.svg" alt="Niagova" width="150" height="36" loading="lazy">
+      <p class="niagova-band-kicker">This demo website is built by Niagova</p>
+      <h2 id="niagova-title">Want a website like this for your business?</h2>
+      <p class="niagova-band-copy">Websites, booking systems and business apps for Malaysian SMEs. Every package and price is on niagova.com.</p>
+    </div>
+    <a class="niagova-band-cta" href="https://niagova.com/#pricing" target="_blank" rel="noopener">View Niagova packages <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+
+  <footer class="footer">
+    <div class="wrap footer-row">
+      <span>© <span id="year"></span> Beauty Salon · Demo website by <a href="https://niagova.com/" target="_blank" rel="noopener">Niagova</a>.</span>
+      <span>Photography, ratings, reviews and schedule are illustrative proposal content.</span>
+    </div>
+  </footer>
+
+  <div class="sticky-bar" id="stickyBar">
+    <a href="#availability">See availability</a>
+    <a class="primary" href="#reserve">Reserve</a>
+  </div>
+  <a class="wa-float" href="https://wa.me/601158121239?text=Hello%20Beauty%20Salon%2C%20I%27d%20like%20to%20ask%20about%20a%20ritual." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.9 2.9 0 0 0-.9 2.2 5 5 0 0 0 1 2.6 11.4 11.4 0 0 0 4.4 3.9c1.6.7 2.3.7 3.1.6a2.6 2.6 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .2-1.2c-.1-.1-.3-.2-.5-.3Z"/></svg>
+    <span>Usually replies within 15 min</span>
+  </a>
+
+  <script src="index.js?v=__BUILD_VERSION__" defer></script>
+</body>
+</html>

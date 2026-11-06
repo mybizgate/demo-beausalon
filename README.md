@@ -1,10 +1,10 @@
-# Beauty Saloon
+# Beauty Salon
 
-MyBizGate website for **Beauty Saloon** (slug `beasaloon`).
+MyBizGate website for **Beauty Salon** (slug `beausalon`).
 
 - Source stays readable in Git; production artifacts are built into `dist/` by the shared MyBizGate platform.
 - `main` is development, `deploy` is production. Pushing to `deploy` builds and deploys automatically.
-- Hosting target: `public_html/demo/beasaloon/` → https://demo-beasaloon.niagova.com
+- Hosting target: `public_html/demo/beausalon/` → https://demo-beausalon.niagova.com
 - Configuration: `site.config.yml`.
 
 ## Local preview
@@ -27,4 +27,4 @@ git checkout main && git push origin main
 git checkout deploy && git merge --ff-only main && git push origin deploy
 ```
 
-Rollback: `../../platform/bin/rollback.sh beasaloon`.
+Rollback: `../../platform/bin/rollback.sh beausalon`.

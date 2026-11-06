@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6efe9">
+  <meta name="description" content="Beauty Salon booking demo website by Niagova.">
+  <meta name="author" content="Niagova">
+  <title>Beauty Salon | Your Ritual, Beautifully Yours</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --wine: #692b3b;
+      --wine-dark: #35141d;
+      --rose: #c77785;
+      --blush: #ead0ce;
+      --cream: #f7f0ea;
+      --paper: #fffaf6;
+      --ink: #32262a;
+      --muted: #796a6d;
+      --gold: #b9894f;
+      --line: rgba(105,43,59,.18);
+      --max: 1200px;
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --sans: "DM Sans", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.65; overflow-x: hidden; }
+    body.menu-open { overflow: hidden; }
+    img { display: block; width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
+    :focus-visible { outline: 3px solid var(--rose); outline-offset: 4px; }
+    .skip-link { position: fixed; top: -70px; left: 18px; z-index: 100; background: var(--wine); color: #fff; padding: 10px 16px; }
+    .skip-link:focus { top: 18px; }
+    .wrap { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; }
+    .eyebrow { color: var(--wine); font-size: .7rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+    .eyebrow::after { content: ""; display: inline-block; width: 42px; height: 1px; margin: 0 0 3px 12px; background: currentColor; }
+    .serif { font-family: var(--serif); font-weight: 500; line-height: .93; letter-spacing: -.035em; }
+    .section-title { margin: 14px 0 18px; max-width: 800px; font-size: clamp(3.2rem, 7vw, 6.7rem); }
+    .lead { color: var(--muted); max-width: 60ch; }
+    .button { display: inline-flex; min-height: 50px; padding: 0 24px; align-items: center; justify-content: center; gap: 10px; border: 1px solid transparent; border-radius: 999px; font-size: .76rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; transition: .25s ease; }
+    .button-wine { background: var(--wine); color: #fff; }
+    .button-wine:hover { background: var(--wine-dark); transform: translateY(-2px); }
+    .button-light { border-color: var(--line); background: rgba(255,255,255,.65); color: var(--wine); }
+    .button-light:hover { background: #fff; }
+
+    .notice { min-height: 34px; display: grid; place-items: center; padding: 7px 16px; background: var(--wine); color: #fff; font-size: .66rem; font-weight: 600; letter-spacing: .14em; text-align: center; text-transform: uppercase; }
+    .site-header { position: absolute; z-index: 40; inset: 34px 0 auto; color: var(--wine-dark); }
+    .nav { min-height: 84px; display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+    .brand { display: flex; align-items: center; gap: 11px; }
+    .monogram { width: 42px; height: 42px; display: grid; place-items: center; border: 1px solid var(--wine); border-radius: 50%; font-family: var(--serif); font-size: 1.4rem; font-style: italic; }
+    .brand-name { display: grid; font-family: var(--serif); font-size: 1.65rem; font-weight: 600; line-height: .9; }
+    .brand-name small { margin-top: 7px; color: var(--muted); font-family: var(--sans); font-size: .53rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a:not(.button) { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .nav-links a:not(.button):hover { color: var(--rose); }
+    .menu-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 50%; background: rgba(255,255,255,.7); color: var(--wine); }
+
+    .hero { min-height: calc(100svh - 34px); position: relative; background: var(--cream); overflow: hidden; }
+    .hero-image { position: absolute; inset: 0; }
+    .hero-image img { position: absolute; inset: 0; height: 100%; object-fit: cover; object-position: center; opacity: 0; transform: scale(1.035); transition: opacity 1.1s ease, transform 7s ease; will-change: opacity, transform; }
+    .hero-image img.is-active { opacity: 1; transform: scale(1); }
+    .hero-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(247,240,234,.08) 45%, rgba(247,240,234,.96) 77%, #f7f0ea 100%); }
+    .hero-wrap { position: relative; min-height: calc(100svh - 34px); display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; padding-top: 112px; }
+    .hero-copy { grid-column: 2; padding: 60px 0 50px 30px; }
+    .hero-kicker { display: flex; align-items: center; gap: 14px; color: var(--wine); font-size: .68rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+    .hero-kicker span { width: 46px; height: 46px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; font-family: var(--serif); font-size: 1.3rem; font-style: italic; }
+    .hero h1 { margin: 20px 0; font-size: clamp(4.4rem, 8vw, 8rem); color: var(--wine-dark); }
+    .hero h1 em { display: block; color: var(--rose); font-weight: 500; }
+    .hero p { max-width: 42ch; color: #65565a; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+    .hero-note { display: flex; gap: 30px; margin-top: 45px; padding-top: 20px; border-top: 1px solid var(--line); }
+    .hero-note strong { display: block; color: var(--wine); font-family: var(--serif); font-size: 1.45rem; }
+    .hero-note span { color: var(--muted); font-size: .72rem; }
+    .hero-dots { position: absolute; right: 28px; bottom: 24px; z-index: 4; display: flex; gap: 8px; padding: 7px 9px; border: 1px solid rgba(105,46,61,.16); border-radius: 999px; background: rgba(255,255,255,.68); backdrop-filter: blur(10px); box-shadow: 0 8px 24px rgba(53,20,29,.1); }
+    .hero-dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%; background: rgba(105,46,61,.32); transition: width .25s ease, background .25s ease; }
+    .hero-dots button.is-active { width: 28px; border-radius: 999px; background: var(--rose); }
+    .seal { position: absolute; left: 50%; bottom: 42px; width: 108px; aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%; background: var(--wine); color: #fff; transform: translateX(-50%) rotate(-8deg); text-align: center; font-family: var(--serif); font-size: 1.08rem; line-height: 1; box-shadow: 0 20px 40px rgba(53,20,29,.22); }
+
+    section { padding: 110px 0; }
+    .intro { background: var(--paper); }
+    .intro-grid { display: grid; grid-template-columns: .72fr 1.28fr; gap: 80px; align-items: start; }
+    .intro-quote { position: sticky; top: 30px; }
+    .intro-quote p { margin: 18px 0 0; color: var(--wine); font-family: var(--serif); font-size: clamp(2rem, 3vw, 3.1rem); line-height: 1.08; }
+    .menu-list { border-top: 1px solid var(--line); }
+    .menu-row { display: grid; grid-template-columns: 70px 1fr auto; gap: 22px; align-items: center; padding: 26px 0; border-bottom: 1px solid var(--line); transition: .25s ease; }
+    .menu-row:hover { padding-left: 14px; background: linear-gradient(90deg, rgba(234,208,206,.25), transparent); }
+    .menu-row > span:first-child { color: var(--rose); font-family: var(--serif); font-size: 1.4rem; font-style: italic; }
+    .menu-row h3 { margin: 0; color: var(--wine-dark); font-family: var(--serif); font-size: 2rem; font-weight: 500; }
+    .menu-row p { margin: 3px 0 0; color: var(--muted); font-size: .85rem; }
+    .menu-row strong { color: var(--wine); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
+
+    .rituals { background: var(--cream); overflow: hidden; }
+    .ritual-head { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: 40px; }
+    .ritual-head .lead { max-width: 38ch; }
+    .ritual-grid { display: grid; grid-template-columns: 1fr .86fr 1fr; gap: 18px; align-items: start; }
+    .ritual-card { background: var(--paper); border-radius: 160px 160px 16px 16px; overflow: hidden; }
+    .ritual-card:nth-child(2) { margin-top: 62px; border-radius: 16px 16px 160px 160px; }
+    .ritual-photo { height: 390px; overflow: hidden; }
+    .ritual-photo img { height: 100%; object-fit: cover; transition: transform .7s ease; }
+    .ritual-card:hover img { transform: scale(1.04); }
+    .ritual-copy { padding: 28px 28px 32px; text-align: center; }
+    .ritual-copy small { color: var(--rose); font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    .ritual-copy h3 { margin: 8px 0; color: var(--wine-dark); font-family: var(--serif); font-size: 2.15rem; font-weight: 500; line-height: 1; }
+    .ritual-copy p { margin: 0; color: var(--muted); font-size: .84rem; }
+
+    .signature { padding-block: 0; background: var(--cream); }
+    .signature-grid { display: grid; grid-template-columns: 1fr 1fr; min-height: 680px; background: var(--wine); color: #fff; }
+    .signature-collage { position: relative; overflow: hidden; }
+    .signature-collage > img { height: 100%; object-fit: cover; }
+    .collage-card { position: absolute; right: 30px; bottom: 30px; width: 190px; padding: 10px; background: #fff; transform: rotate(4deg); box-shadow: 0 18px 50px rgba(0,0,0,.25); }
+    .collage-card img { aspect-ratio: 1; object-fit: cover; }
+    .collage-card span { display: block; padding: 9px 4px 3px; color: var(--wine); font-family: var(--serif); font-size: 1.1rem; text-align: center; }
+    .signature-copy { padding: 80px max(46px, 7vw); display: flex; flex-direction: column; justify-content: center; }
+    .signature-copy .eyebrow { color: var(--blush); }
+    .signature-copy h2 { margin: 20px 0; font-size: clamp(3.6rem, 6vw, 6rem); }
+    .signature-copy > p { color: #e9dadd; }
+    .signature-points { display: grid; gap: 18px; margin-top: 26px; }
+    .signature-point { display: grid; grid-template-columns: 34px 1fr; gap: 13px; }
+    .signature-point span { width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.35); border-radius: 50%; font-family: var(--serif); font-style: italic; }
+    .signature-point strong { display: block; font-family: var(--serif); font-size: 1.35rem; }
+    .signature-point p { margin: 2px 0 0; color: #d8c1c6; font-size: .82rem; }
+
+    .reviews { background: var(--paper); }
+    .reviews-grid { display: grid; grid-template-columns: .7fr 1.3fr; gap: 90px; align-items: center; }
+    .google-score { position: relative; width: min(330px, 100%); aspect-ratio: 1; display: grid; place-content: center; text-align: center; border: 1px solid var(--line); border-radius: 50%; }
+    .google-score::before, .google-score::after { content: ""; position: absolute; border: 1px solid var(--line); border-radius: 50%; }
+    .google-score::before { inset: 16px; } .google-score::after { inset: -16px; border-style: dashed; }
+    .google-score small { color: var(--muted); font-weight: 600; }
+    .google-score strong { color: var(--wine); font-family: var(--serif); font-size: 6rem; line-height: .85; }
+    .stars { color: var(--gold); letter-spacing: .12em; }
+    .review-copy h2 { margin-bottom: 34px; }
+    .quote-slider { position: relative; min-height: 220px; }
+    .quote { display: none; }
+    .quote.active { display: block; animation: fade .5s ease; }
+    .quote blockquote { margin: 0; color: var(--wine-dark); font-family: var(--serif); font-size: clamp(1.8rem, 3vw, 2.8rem); line-height: 1.18; }
+    .quote footer { margin-top: 18px; color: var(--muted); font-size: .8rem; }
+    .quote-nav { display: flex; gap: 8px; margin-top: 20px; }
+    .quote-nav button { width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 50%; background: transparent; color: var(--wine); }
+    .proposal-note { display: inline-flex; margin-top: 22px; padding: 7px 10px; background: var(--cream); color: var(--muted); font-size: .65rem; letter-spacing: .08em; text-transform: uppercase; }
+    @keyframes fade { from { opacity: 0; transform: translateY(6px); } }
+
+    .social { background: var(--blush); }
+    .social-head { text-align: center; margin-bottom: 46px; }
+    .social-head .section-title { margin-inline: auto; }
+    .social-head p { margin-inline: auto; }
+    .insta-wall { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; align-items: start; }
+    .insta-card { padding: 10px 10px 18px; background: #fff; box-shadow: 0 16px 35px rgba(105,43,59,.1); transition: .3s ease; }
+    .insta-card:nth-child(2), .insta-card:nth-child(4) { margin-top: 54px; transform: rotate(1.4deg); }
+    .insta-card:nth-child(1), .insta-card:nth-child(3) { transform: rotate(-1.2deg); }
+    .insta-card:hover { transform: translateY(-8px) rotate(0); }
+    .insta-card img { aspect-ratio: 4 / 5; object-fit: cover; }
+    .insta-caption { display: flex; justify-content: space-between; gap: 10px; padding: 13px 4px 0; color: var(--wine); font-size: .7rem; font-weight: 700; }
+    .social-follow { margin-top: 46px; text-align: center; color: var(--wine); }
+    .social-follow strong { display: block; font-family: var(--serif); font-size: 1.8rem; }
+    .social-follow span { color: #735762; font-size: .75rem; }
+
+    .packages { background: var(--paper); }
+    .packages-head { display: grid; grid-template-columns: 1fr .72fr; gap: 54px; align-items: end; margin-bottom: 44px; }
+    .package-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .package-card { overflow: hidden; border: 1px solid var(--line); border-radius: 180px 180px 18px 18px; background: var(--cream); transition: transform .3s ease, box-shadow .3s ease; }
+    .package-card:hover { transform: translateY(-8px); box-shadow: 0 24px 55px rgba(105,43,59,.12); }
+    .package-card.featured { background: var(--wine); color: #fff; }
+    .package-photo { height: 330px; overflow: hidden; }
+    .package-photo img { height: 100%; object-fit: cover; transition: transform .7s ease; }
+    .package-card:hover .package-photo img { transform: scale(1.04); }
+    .package-copy { padding: 30px 30px 34px; text-align: center; }
+    .package-copy small { color: var(--rose); font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+    .package-copy h3 { margin: 8px 0 2px; color: var(--wine-dark); font-family: var(--serif); font-size: 2.25rem; font-weight: 500; line-height: 1; }
+    .package-card.featured h3 { color: #fff; }
+    .package-price { margin: 15px 0; color: var(--wine); font-family: var(--serif); font-size: 3rem; line-height: 1; }
+    .package-price span { display: block; margin-bottom: 4px; color: var(--muted); font-family: var(--sans); font-size: .63rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .package-card.featured .package-price { color: #fff; }
+    .package-card.featured .package-price span { color: var(--blush); }
+    .package-list { min-height: 116px; margin: 0 0 24px; padding: 0; list-style: none; color: var(--muted); font-size: .82rem; }
+    .package-card.featured .package-list { color: #eadce0; }
+    .package-list li { padding: 6px 0; }
+    .package-list li::before { content: "✦"; margin-right: 8px; color: var(--rose); font-size: .62rem; }
+    .price-note { margin: 24px 0 0; color: var(--muted); font-size: .73rem; text-align: center; }
+
+    .booking { background: var(--wine-dark); color: #fff; position: relative; overflow: hidden; }
+    .booking::before { content: ""; position: absolute; width: 480px; aspect-ratio: 1; right: -130px; top: -180px; border: 1px solid rgba(255,255,255,.12); border-radius: 50%; box-shadow: 0 0 0 80px rgba(255,255,255,.03), 0 0 0 160px rgba(255,255,255,.02); }
+    .booking-grid { position: relative; display: grid; grid-template-columns: .76fr 1.24fr; gap: 70px; align-items: start; }
+    .booking-intro .eyebrow { color: var(--blush); }
+    .booking-intro h2 { margin: 18px 0; font-size: clamp(3.8rem, 6vw, 6.3rem); }
+    .booking-intro p { color: #d8c7cb; }
+    .booking-details { display: grid; gap: 12px; margin-top: 34px; color: #eadce0; font-size: .82rem; }
+    .booking-details span { display: flex; gap: 10px; align-items: center; }
+    .booking-form { padding: 40px; background: var(--paper); color: var(--ink); border-radius: 170px 170px 20px 20px; }
+    .booking-form h3 { margin: 0 0 25px; color: var(--wine); font-family: var(--serif); font-size: 2.5rem; font-weight: 500; text-align: center; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 17px; }
+    .field { display: grid; gap: 6px; }
+    .field.full { grid-column: 1 / -1; }
+    label { color: var(--wine); font-size: .68rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+    input, select, textarea { width: 100%; padding: 12px 13px; border: 1px solid var(--line); border-radius: 4px; background: #fff; color: var(--ink); }
+    textarea { min-height: 85px; resize: vertical; }
+    .form-actions { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 24px; }
+    .form-status { min-height: 20px; color: #55783e; font-size: .76rem; text-align: center; }
+
+    .location { background: var(--cream); }
+    .location-grid { display: grid; grid-template-columns: .72fr 1.28fr; gap: 52px; align-items: center; }
+    .location-copy h2 { margin: 14px 0 18px; }
+    .location-address { display: block; margin: 26px 0; color: var(--wine); font-style: normal; font-weight: 700; }
+    .location-map { position: relative; min-height: 430px; overflow: hidden; border: 1px solid var(--line); border-radius: 170px 170px 18px 18px; background: var(--blush); box-shadow: 0 22px 50px rgba(83,32,48,.12); }
+    .location-map iframe { display: block; width: 100%; min-height: 430px; border: 0; }
+    .location-map .button { position: absolute; right: 20px; bottom: 20px; }
+
+
+    .footer { padding: 32px 0; background: #260d14; color: #b99fa6; font-size: .76rem; }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: .7s ease; }
+    .reveal.show { opacity: 1; transform: none; }
+    .packages:target .reveal, .location:target .reveal { opacity: 1; transform: none; }
+
+    @media (max-width: 980px) {
+      .wrap { width: min(100% - 32px, var(--max)); }
+      .menu-toggle { display: grid; place-items: center; }
+      .nav-links { position: fixed; inset: 118px 16px auto; display: grid; gap: 0; padding: 14px; background: var(--paper); border: 1px solid var(--line); box-shadow: 0 22px 50px rgba(53,20,29,.15); opacity: 0; pointer-events: none; transform: translateY(-16px); transition: .25s ease; }
+      .nav-links.open { opacity: 1; pointer-events: auto; transform: none; }
+      .nav-links a { padding: 14px; }
+      .hero-image::after { background: linear-gradient(0deg, #f7f0ea 5%, rgba(247,240,234,.92) 42%, rgba(247,240,234,.05) 75%); }
+      .hero-wrap { align-items: end; grid-template-columns: 1fr; padding-top: 280px; }
+      .hero-copy { grid-column: auto; max-width: 620px; padding: 60px 0; }
+      .seal { display: none; }
+      .intro-grid, .reviews-grid, .booking-grid, .packages-head, .location-grid { grid-template-columns: 1fr; }
+      .intro-quote { position: relative; top: auto; }
+      .ritual-grid { grid-template-columns: 1fr 1fr; }
+      .ritual-card:nth-child(2) { margin-top: 0; }
+      .ritual-card:last-child { grid-column: 1 / -1; width: 50%; justify-self: center; }
+      .signature-grid { grid-template-columns: 1fr; }
+      .signature-collage { min-height: 540px; }
+      .google-score { margin-inline: auto; }
+      .insta-wall { grid-template-columns: 1fr 1fr; }
+      .package-grid { grid-template-columns: 1fr 1fr; }
+      .package-card:last-child { grid-column: 1 / -1; width: calc(50% - 10px); justify-self: center; }
+    }
+    @media (max-width: 640px) {
+      section { padding: 78px 0; }
+      .notice { font-size: .58rem; }
+      .site-header { inset-block-start: 34px; }
+      .nav { min-height: 72px; }
+      .nav-links { top: 106px; }
+      .brand-name { font-size: 1.35rem; }
+      .hero { min-height: 800px; }
+      .hero-image img { object-position: 37% center; }
+      .hero-wrap { min-height: 800px; padding-top: 300px; }
+      .hero-copy { padding-bottom: 44px; }
+      .hero h1 { font-size: clamp(4rem, 20vw, 6rem); }
+      .hero-note { gap: 18px; }
+      .hero-dots { left: 16px; right: auto; bottom: 16px; }
+      .menu-row { grid-template-columns: 46px 1fr; }
+      .menu-row strong { grid-column: 2; }
+      .ritual-head { display: grid; }
+      .ritual-grid { grid-template-columns: 1fr; }
+      .ritual-card, .ritual-card:nth-child(2) { border-radius: 130px 130px 16px 16px; }
+      .ritual-card:last-child { grid-column: auto; width: 100%; }
+      .ritual-photo { height: 360px; }
+      .signature-collage { min-height: 440px; }
+      .collage-card { width: 145px; right: 18px; bottom: 18px; }
+      .signature-copy { padding: 58px 26px; }
+      .insta-wall { gap: 10px; }
+      .package-grid { grid-template-columns: 1fr; }
+      .package-card:last-child { grid-column: auto; width: 100%; }
+      .package-card { border-radius: 140px 140px 16px 16px; }
+      .insta-card { padding: 7px 7px 12px; }
+      .insta-card:nth-child(2), .insta-card:nth-child(4) { margin-top: 32px; }
+      .booking-grid { gap: 44px; }
+      .booking-form { padding: 34px 22px; border-radius: 90px 90px 16px 16px; }
+      .location-map { border-radius: 90px 90px 16px 16px; }
+      .location-map, .location-map iframe { min-height: 320px; }
+      .location-map .button { right: 12px; bottom: 12px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .field.full { grid-column: auto; }
+      .footer-row { display: grid; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  /* Niagova promotion band: the same on every demo template, in Niagova's own colours. */
+.niagova-band { padding: 44px 16px; background: linear-gradient(120deg, #0f2f3e, #153f52); color: #fff; font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif; }
+.niagova-band-inner { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 32px; align-items: center; max-width: 1180px; margin-inline: auto; }
+.niagova-band img { display: block; width: 150px; height: auto; margin-bottom: 14px; }
+.niagova-band-kicker { margin: 0 0 6px; color: #08cfb7; font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.niagova-band h2 { max-width: none; margin: 0 0 8px; color: #fff; font-family: inherit; font-size: clamp(1.5rem, 3.4vw, 2.2rem); font-weight: 800; letter-spacing: -.01em; line-height: 1.15; }
+.niagova-band-copy { max-width: 60ch; margin: 0; color: #cfe3e4; font-size: .95rem; line-height: 1.55; }
+.niagova-band-cta { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 12px 22px; border-radius: 999px; background: #08cfb7; color: #063746; font-size: .95rem; font-weight: 800; text-decoration: none; white-space: nowrap; transition: background .16s ease; }
+.niagova-band-cta:hover { background: #2fe0ca; }
+.niagova-band-cta:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+@media (max-width: 719px) {
+  .niagova-band-inner { grid-template-columns: 1fr; gap: 22px; }
+  .niagova-band-cta { width: 100%; }
+}
+.niagova-band-copy { font-weight: 400; }
+footer a { color: inherit; text-decoration: underline; }
+</style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="notice">A considered beauty experience · by appointment · Kuala Lumpur</div>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="Beauty Salon home"><span class="monogram">BS</span><span class="brand-name">Beauty Salon<small>Hair &amp; Beauty Lounge</small></span></a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Open navigation">☰</button>
+      <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
+        <a href="#menu">Our menu</a>
+        <a href="#experience">Experience</a>
+        <a href="#packages">Packages</a>
+        <a href="#reviews">Kind words</a>
+        <a href="#location">Find us</a>
+        <a class="button button-wine" href="#booking">Book a ritual</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-image" id="heroMedia">
+        <img class="is-active" src="images/beauty-hero-v2.webp" alt="A stylist finishing a client's hair in an elegant beauty lounge">
+        <img src="images/beauty-hero-hair-v3.webp" alt="A stylist shaping glossy waves for a relaxed client">
+        <img src="images/beauty-hero-facial-v3.webp" alt="A client enjoying a gentle facial massage in a serene beauty lounge">
+      </div>
+      <div class="wrap hero-wrap">
+        <div class="hero-copy">
+          <div class="hero-kicker"><span>✦</span> Personal beauty, considered</div>
+          <h1 class="serif">Your ritual,<em>beautifully yours.</em></h1>
+          <p>Thoughtful hair, skin and beauty services designed around how you want to feel—not a one-size-fits-all trend.</p>
+          <div class="hero-actions"><a class="button button-wine" href="#booking">Reserve your moment</a><a class="button button-light" href="#menu">View the menu</a></div>
+          <div class="hero-note"><div><strong>01</strong><span>Personal consultation</span></div><div><strong>02</strong><span>Tailored ritual</span></div><div><strong>03</strong><span>Aftercare guidance</span></div></div>
+        </div>
+      </div>
+      <div class="hero-dots" id="heroDots" role="group" aria-label="Choose a Beauty Salon scene"></div>
+      <div class="seal" aria-hidden="true">Made for<br>your moment</div>
+    </section>
+
+    <section class="intro" id="menu">
+      <div class="wrap intro-grid">
+        <aside class="intro-quote reveal"><div class="eyebrow">The beauty menu</div><p>“A quieter, more personal way to choose the care that feels right for you.”</p></aside>
+        <div class="menu-list reveal">
+          <article class="menu-row"><span>01</span><div><h3>Cut, shape & finish</h3><p>Consultation-led cuts, styling and occasion-ready finishing.</p></div><strong>60–90 min</strong></article>
+          <article class="menu-row"><span>02</span><div><h3>Colour & renewal</h3><p>Dimensional colour, gloss, repair rituals and scalp care.</p></div><strong>From 90 min</strong></article>
+          <article class="menu-row"><span>03</span><div><h3>Skin & facial rituals</h3><p>Calming, brightening and hydration-focused facial experiences.</p></div><strong>45–75 min</strong></article>
+          <article class="menu-row"><span>04</span><div><h3>Bridal & occasion</h3><p>Refined makeup, hair trials and coordinated event preparation.</p></div><strong>By consultation</strong></article>
+          <article class="menu-row"><span>05</span><div><h3>Nails & finishing</h3><p>Considered nail care and polished finishing touches.</p></div><strong>45–60 min</strong></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="rituals" id="experience">
+      <div class="wrap">
+        <div class="ritual-head reveal"><div><div class="eyebrow">Choose your mood</div><h2 class="serif section-title">Three ways to feel renewed.</h2></div><p class="lead">Each story below gives the client a more emotional way to understand services than a standard price list alone.</p></div>
+        <div class="ritual-grid reveal">
+          <article class="ritual-card"><div class="ritual-photo"><img src="images/beauty-hero-v2.webp" alt="Professional salon hair styling" loading="lazy"></div><div class="ritual-copy"><small>Polished</small><h3>The Signature Hair Edit</h3><p>A personalised consultation, precision shape and a finish that moves naturally.</p></div></article>
+          <article class="ritual-card"><div class="ritual-photo"><img src="images/facial-ritual.jpg" alt="Calm facial treatment experience" loading="lazy"></div><div class="ritual-copy"><small>Restored</small><h3>The Quiet Glow</h3><p>A skin-focused ritual for hydration, calm and a softly luminous finish.</p></div></article>
+          <article class="ritual-card"><div class="ritual-photo"><img src="images/beauty-bridal-v2.webp" alt="Bride receiving professional occasion makeup" loading="lazy"></div><div class="ritual-copy"><small>Celebrated</small><h3>The Occasion Atelier</h3><p>Hair and makeup planned around your dress, mood and most photographed moments.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="signature">
+      <div class="signature-grid">
+        <div class="signature-collage reveal"><img src="images/nail-care.jpg" alt="Detailed beauty and nail care" loading="lazy"><div class="collage-card"><img src="images/beauty-hero-v2.webp" alt="Salon hair styling"><span>Beauty, made personal.</span></div></div>
+        <div class="signature-copy reveal">
+          <div class="eyebrow">The Beauty Salon experience</div>
+          <h2 class="serif">Come as you are. Leave as yourself, elevated.</h2>
+          <p>The strongest salon websites sell more than a treatment. They communicate how the space feels, how the consultation works and why clients can trust the result.</p>
+          <div class="signature-points">
+            <div class="signature-point"><span>i</span><div><strong>Consult before we create</strong><p>Capture preferences, references, concerns and the occasion before the appointment.</p></div></div>
+            <div class="signature-point"><span>ii</span><div><strong>A pace that feels personal</strong><p>Explain timings and preparation so every visit feels calm and considered.</p></div></div>
+            <div class="signature-point"><span>iii</span><div><strong>Care beyond the chair</strong><p>Send clients home with clear, relevant aftercare and an easy path to rebook.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reviews" id="reviews">
+      <div class="wrap reviews-grid">
+        <div class="google-score reveal" aria-label="Illustrative Google rating of 4.9 out of 5"><small>Google rating preview</small><strong>4.9</strong><span class="stars">★★★★★</span><small>Proposal display</small></div>
+        <div class="review-copy reveal">
+          <div class="eyebrow">Kind words</div>
+          <h2 class="serif section-title">The feeling stays with you.</h2>
+          <div class="quote-slider" id="quoteSlider">
+            <article class="quote active"><blockquote>“The consultation felt genuinely personal, and I left looking like the best version of myself.”</blockquote><footer>Sample review · replace with a verified Google review</footer></article>
+            <article class="quote"><blockquote>“Every detail—from the welcome to the aftercare—felt calm, warm and beautifully considered.”</blockquote><footer>Sample review · replace with a verified Google review</footer></article>
+            <article class="quote"><blockquote>“I knew what to expect before arriving, and booking the next visit took less than a minute.”</blockquote><footer>Sample review · replace with a verified Google review</footer></article>
+          </div>
+          <div class="quote-nav"><button type="button" id="previousQuote" aria-label="Previous review">←</button><button type="button" id="nextQuote" aria-label="Next review">→</button></div>
+          <span class="proposal-note">Illustrative content—connect the client's verified Google profile</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="social" id="instagram">
+      <div class="wrap">
+        <div class="social-head reveal"><div class="eyebrow">Seen at the studio</div><h2 class="serif section-title">Your next look, saved.</h2><p class="lead">A shoppable-feeling social wall turns everyday salon work into inspiration and creates a natural path from Instagram to booking.</p></div>
+        <div class="insta-wall reveal">
+          <a class="insta-card" href="#booking" aria-label="Hair transformation sample post"><img src="images/beauty-hero-v2.webp" alt="Salon hair styling inspiration"><span class="insta-caption"><span>Signature waves</span><span>♡ 328</span></span></a>
+          <a class="insta-card" href="#booking" aria-label="Skin ritual sample post"><img src="images/facial-ritual.jpg" alt="Relaxing facial ritual"><span class="insta-caption"><span>The quiet glow</span><span>♡ 214</span></span></a>
+          <a class="insta-card" href="#booking" aria-label="Bridal makeup sample post"><img src="images/beauty-bridal-v2.webp" alt="Bridal makeup inspiration"><span class="insta-caption"><span>Soft bridal edit</span><span>♡ 406</span></span></a>
+          <a class="insta-card" href="#booking" aria-label="Nail care sample post"><img src="images/nail-care.jpg" alt="Nail care inspiration"><span class="insta-caption"><span>Finishing touch</span><span>♡ 187</span></span></a>
+        </div>
+        <div class="social-follow reveal"><strong>@beautysalon</strong><span>Sample Instagram preview · connect the client's real feed before launch</span></div>
+      </div>
+    </section>
+
+    <section class="packages" id="packages">
+      <div class="wrap">
+        <div class="packages-head">
+          <div><div class="eyebrow">Sample package offers</div><h2 class="serif section-title">Begin with the ritual that feels like you.</h2></div>
+          <p class="lead">Curated options make the first decision feel effortless while leaving room for a personal consultation before every appointment.</p>
+        </div>
+        <div class="package-grid">
+          <article class="package-card">
+            <div class="package-photo"><img src="images/beauty-hair-package-v2.webp" alt="Personalised glossy hair colour treatment in a luxury salon" loading="lazy"></div>
+            <div class="package-copy"><small>Polished</small><h3>Signature Hair Edit</h3><div class="package-price"><span>From</span>RM98</div><ul class="package-list"><li>Personal consultation</li><li>Precision cut and shape</li><li>Signature finish</li></ul><a class="button button-light" href="#booking" data-select-service="Cut, shape & finish">Choose this ritual</a></div>
+          </article>
+          <article class="package-card featured">
+            <div class="package-photo"><img src="images/beauty-facial-package-v2.webp" alt="Relaxing personalised facial skincare ritual" loading="lazy"></div>
+            <div class="package-copy"><small>Restored</small><h3>Quiet Glow Facial</h3><div class="package-price"><span>From</span>RM168</div><ul class="package-list"><li>Skin needs consultation</li><li>Hydration-focused facial</li><li>Personal aftercare guide</li></ul><a class="button button-light" href="#booking" data-select-service="Skin & facial ritual">Choose this ritual</a></div>
+          </article>
+          <article class="package-card">
+            <div class="package-photo"><img src="images/beauty-bridal-v2.webp" alt="Refined occasion makeup preparation" loading="lazy"></div>
+            <div class="package-copy"><small>Celebrated</small><h3>Occasion Atelier</h3><div class="package-price"><span>From</span>RM288</div><ul class="package-list"><li>Look and mood consultation</li><li>Occasion hair styling</li><li>Camera-ready makeup</li></ul><a class="button button-light" href="#booking" data-select-service="Bridal & occasion">Choose this ritual</a></div>
+          </article>
+        </div>
+        <p class="price-note">Illustrative proposal prices only. Final services and pricing should be confirmed during consultation.</p>
+      </div>
+    </section>
+
+    <section class="booking" id="booking">
+      <div class="wrap booking-grid">
+        <div class="booking-intro reveal"><div class="eyebrow">Your time, reserved</div><h2 class="serif">Let’s create your next moment.</h2><p>Share your preferred ritual and timing. This demo prepares a polished WhatsApp enquiry so the salon can confirm the details personally.</p><div class="booking-details"><span>✦ Tuesday–Sunday · by appointment</span><span>✦ Kampung Pandan, Kuala Lumpur</span><span>✦ No payment collected on this demo</span></div></div>
+        <form class="booking-form reveal" id="bookingForm">
+          <h3>Book your ritual</h3>
+          <div class="form-grid">
+            <div class="field"><label for="name">Your name</label><input id="name" name="name" required autocomplete="name" placeholder="Full name"></div>
+            <div class="field"><label for="phone">Mobile number</label><input id="phone" name="phone" required autocomplete="tel" placeholder="01x-xxxxxxx"></div>
+            <div class="field"><label for="service">Choose a ritual</label><select id="service" name="service" required><option value="">Select one</option><option>Cut, shape & finish</option><option>Colour & renewal</option><option>Skin & facial ritual</option><option>Bridal & occasion</option><option>Nails & finishing</option></select></div>
+            <div class="field"><label for="stylist">Preferred artist</label><input id="stylist" name="stylist" placeholder="Optional"></div>
+            <div class="field"><label for="date">Preferred date</label><input id="date" name="date" type="date" required></div>
+            <div class="field"><label for="time">Preferred time</label><select id="time" name="time" required><option value="">Select one</option><option>10:00 AM</option><option>12:00 PM</option><option>2:00 PM</option><option>4:00 PM</option><option>6:00 PM</option></select></div>
+            <div class="field full"><label for="notes">Tell us what you have in mind</label><textarea id="notes" name="notes" placeholder="Your occasion, current hair or skin goals, and anything we should know"></textarea></div>
+          </div>
+          <div class="form-actions"><button class="button button-wine" type="submit">Continue on WhatsApp</button><span class="form-status" id="formStatus" role="status"></span></div>
+        </form>
+      </div>
+    </section>
+
+    <section class="location" id="location" aria-labelledby="beauty-location-title">
+      <div class="wrap location-grid">
+        <div class="location-copy reveal"><div class="eyebrow">Find us</div><h2 class="serif section-title" id="beauty-location-title">Your next ritual, in Kampung Pandan.</h2><p class="lead">Use the exact map pin to plan your visit and open turn-by-turn directions on your phone.</p><address class="location-address">2A Lorong Delapan, Kampung Pandan<br>55100 Kuala Lumpur</address><a class="button button-light" href="https://www.google.com/maps/search/?api=1&amp;query=3.144827966176431%2C101.74171596840188" target="_blank" rel="noopener">Open in Google Maps</a></div>
+        <div class="location-map reveal"><iframe title="Map to Beauty Salon in Kampung Pandan, Kuala Lumpur" src="https://www.google.com/maps?q=3.144827966176431,101.74171596840188&amp;z=16&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><a class="button button-wine" href="https://www.google.com/maps/dir/?api=1&amp;destination=3.144827966176431%2C101.74171596840188" target="_blank" rel="noopener">Get directions</a></div>
+      </div>
+    </section>
+
+    </main>
+
+<section class="niagova-band" aria-labelledby="niagova-title">
+  <div class="niagova-band-inner">
+    <div>
+      <img src="images/niagova-logo-on-dark.svg" alt="Niagova" width="150" height="36" loading="lazy">
+      <p class="niagova-band-kicker">This demo website is built by Niagova</p>
+      <h2 id="niagova-title">Want a website like this for your business?</h2>
+      <p class="niagova-band-copy">Websites, booking systems and business apps for Malaysian SMEs. Every package and price is on niagova.com.</p>
+    </div>
+    <a class="niagova-band-cta" href="https://niagova.com/#pricing" target="_blank" rel="noopener">View Niagova packages <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+
+  <footer class="footer"><div class="wrap footer-row"><span>© <span id="year"></span> Beauty Salon · Demo website by <a href="https://niagova.com/" target="_blank" rel="noopener">Niagova</a>.</span><span>Proposal imagery, sample ratings and social content are illustrative.</span></div></footer>
+
+  <script>
+    const menuToggle = document.querySelector('#menuToggle');
+    const navLinks = document.querySelector('#navLinks');
+    const bookingForm = document.querySelector('#bookingForm');
+    const formStatus = document.querySelector('#formStatus');
+    const dateInput = document.querySelector('#date');
+    const quotes = [...document.querySelectorAll('.quote')];
+    let quoteIndex = 0;
+
+    const heroSlides = [...document.querySelectorAll('#heroMedia img')];
+    const heroDots = document.querySelector('#heroDots');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let heroIndex = 0;
+    let heroTimer;
+    const showHero = (index) => {
+      heroIndex = (index + heroSlides.length) % heroSlides.length;
+      heroSlides.forEach((slide, i) => slide.classList.toggle('is-active', i === heroIndex));
+      heroDots.querySelectorAll('button').forEach((dot, i) => {
+        dot.classList.toggle('is-active', i === heroIndex);
+        dot.setAttribute('aria-pressed', String(i === heroIndex));
+      });
+    };
+    const startHero = () => {
+      clearInterval(heroTimer);
+      if (!reduceMotion && !document.hidden && heroSlides.length > 1) heroTimer = setInterval(() => showHero(heroIndex + 1), 6500);
+    };
+    heroSlides.forEach((slide, i) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('aria-label', `Show hero image ${i + 1} of ${heroSlides.length}`);
+      dot.addEventListener('click', () => { showHero(i); startHero(); });
+      heroDots.append(dot);
+    });
+    showHero(0);
+    startHero();
+    document.addEventListener('visibilitychange', startHero);
+
+    const closeMenu = () => {
+      navLinks.classList.remove('open');
+      document.body.classList.remove('menu-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    };
+    menuToggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      document.body.classList.toggle('menu-open', open);
+      menuToggle.setAttribute('aria-expanded', String(open));
+    });
+    navLinks.addEventListener('click', (event) => { if (event.target.closest('a')) closeMenu(); });
+
+    const showQuote = (offset) => {
+      quotes[quoteIndex].classList.remove('active');
+      quoteIndex = (quoteIndex + offset + quotes.length) % quotes.length;
+      quotes[quoteIndex].classList.add('active');
+    };
+    document.querySelector('#previousQuote').addEventListener('click', () => showQuote(-1));
+    document.querySelector('#nextQuote').addEventListener('click', () => showQuote(1));
+
+    const today = new Date();
+    dateInput.min = today.toISOString().split('T')[0];
+    document.querySelector('#year').textContent = String(today.getFullYear());
+
+    document.querySelectorAll('[data-select-service]').forEach((link) => {
+      link.addEventListener('click', () => {
+        document.querySelector('#service').value = link.dataset.selectService;
+      });
+    });
+
+    bookingForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = Object.fromEntries(new FormData(bookingForm).entries());
+      const message = [
+        'Beauty Salon appointment enquiry',
+        `Name: ${data.name}`,
+        `Mobile: ${data.phone}`,
+        `Ritual: ${data.service}`,
+        `Preferred artist: ${data.stylist || 'No preference'}`,
+        `Preferred slot: ${data.date} at ${data.time}`,
+        `Notes: ${data.notes || '-'}`
+      ].join('\n');
+      localStorage.setItem('beausalon_elegant_enquiry', JSON.stringify({ ...data, createdAt: new Date().toISOString() }));
+      formStatus.textContent = 'Saved in this browser. Opening WhatsApp concierge…';
+      window.open(`https://wa.me/601158121239?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+    });
+
+    const revealItems = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+        if (entry.isIntersecting) { entry.target.classList.add('show'); observer.unobserve(entry.target); }
+      }), { threshold: .1 });
+      revealItems.forEach((item) => observer.observe(item));
+    } else {
+      revealItems.forEach((item) => item.classList.add('show'));
+    }
+  </script>
+</body>
+</html>

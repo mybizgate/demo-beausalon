@@ -1,14 +1,14 @@
 # MyBizGate site configuration. The slug is the permanent identity; the domain may change later.
 client:
-  name: Beauty Saloon
-  slug: beasaloon
+  name: Beauty Salon
+  slug: beausalon
 template:
   id: 00-empty-template
   version: 1.0.0
 platform_ref: v1.7.1
 domain:
   type: subdomain
-  primary: demo-beasaloon.niagova.com
+  primary: demo-beausalon.niagova.com
 business:
   whatsapp: '+601158121239'
   email: sales@niagova.com
@@ -17,16 +17,16 @@ business:
   facebook: www.facebook.com
   instagram: www.instagram.com
   tiktok: www.tiktok.com
-  short_name: Beauty Saloon
+  short_name: Beauty Salon
   locality: Kuala Lumpur
 hosting:
-  deploy_dir: public_html/demo/beasaloon/
+  deploy_dir: public_html/demo/beausalon/
   ftp_account: dedicated
 site:
   kind: demo
   environment: production
-  production_url: https://demo-beasaloon.niagova.com
-  identity: Beauty Saloon
+  production_url: https://demo-beausalon.niagova.com
+  identity: Beauty Salon
 build:
   exclude: []
   images:
@@ -40,5 +40,5 @@ qa:
   browser_smoke: false
   screenshots: false
 github:
-  repo: demo-beasaloon
+  repo: demo-beausalon
   visibility: public

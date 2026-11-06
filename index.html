@@ -4,25 +4,55 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="build-version" content="__BUILD_VERSION__">
-  <title>Beauty Saloon</title>
-  <meta name="description" content="Beauty Saloon website.">
-  <!-- Starter page: remove noindex when the real website replaces it. -->
-  <meta name="robots" content="noindex, nofollow">
-  <link rel="canonical" href="https://demo-beasaloon.niagova.com/">
+  <meta name="author" content="Niagova">
+  <title>Beauty Salon Template Showcase</title>
+  <meta name="description" content="Compare three Beauty Salon website concepts in one showcase: Elegant, Modern and Luxury.">
+  <meta name="theme-color" content="#fffaf6">
+  <meta property="og:title" content="Beauty Salon Template Showcase">
+  <meta property="og:image" content="01-elegant/images/beauty-hero-facial-v3.webp">
+  <link rel="canonical" href="https://demo-beausalon.niagova.com/">
+  <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="index.css?v=__BUILD_VERSION__">
 </head>
 <body>
-  <main class="page">
-    <p class="eyebrow">Empty template</p>
-    <h1>Beauty Saloon</h1>
-    <p class="lead">This project is ready. Replace this page with the real website.</p>
-    <ul class="checks" aria-label="Template load status">
-      <li class="is-ok" data-check="html">HTML loaded</li>
-      <li data-check="css">CSS not loaded</li>
-      <li data-check="js">JavaScript not loaded</li>
-    </ul>
-    <a class="cta" href="https://wa.me/601158121239?text=Hello%20Beauty%20Saloon">WhatsApp us</a>
+  <a class="skip-link" href="#templatePreview">Skip to website preview</a>
+
+  <header class="showcase-bar" aria-label="Template preview controls">
+    <div class="showcase-identity">
+      <a class="showcase-logo" href="https://niagova.com/" target="_blank" rel="noopener"><img src="assets/niagova-logo.svg" alt="Niagova" width="118" height="28"></a>
+      <span class="showcase-title">
+        <strong>Beauty Salon concepts</strong>
+        <small><span>Demo by Niagova</span> · <span id="previewStatus" aria-live="polite">Previewing Elegant</span></small>
+      </span>
+    </div>
+
+    <nav class="template-tabs" aria-label="Choose a website template">
+      <button class="template-tab" type="button" data-template="elegant" aria-pressed="true"><span>01</span> Elegant</button>
+      <button class="template-tab" type="button" data-template="modern" aria-pressed="false"><span>02</span> Modern</button>
+      <button class="template-tab" type="button" data-template="luxury" aria-pressed="false"><span>03</span> Luxury</button>
+    </nav>
+
+    <div class="showcase-actions">
+      <a class="open-template" id="openTemplate" href="01-elegant/index.html" target="_blank" rel="noopener" aria-label="Open this template as a full page in a new tab">
+        <span class="open-label">Open full page</span> <span aria-hidden="true">↗</span>
+      </a>
+      <a class="view-packages" href="https://niagova.com/#pricing" target="_blank" rel="noopener">View packages</a>
+    </div>
+  </header>
+
+  <main class="preview-shell">
+    <iframe id="templatePreview" name="templatePreview" src="01-elegant/index.html" title="Elegant beauty salon website template preview"></iframe>
   </main>
-  <script src="index.js?v=__BUILD_VERSION__" defer></script>
+
+  <noscript>
+    <div class="no-script">
+      JavaScript is needed for the template switcher. Open a template directly:
+      <a href="01-elegant/index.html">Elegant</a>,
+      <a href="02-modern/index.html">Modern</a> or
+      <a href="03-luxury/index.html">Luxury</a>.
+    </div>
+  </noscript>
+
+  <script src="index.js?v=__BUILD_VERSION__"></script>
 </body>
 </html>

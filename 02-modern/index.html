@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fbf7f2">
+  <meta name="description" content="Beauty Salon — facials, lashes, brows, nails and body care for women in Kuala Lumpur. See prices, check open slots and book in three taps, no waiting for a reply.">
+  <meta name="author" content="Niagova">
+  <title>Beauty Salon | Book your glow in three taps</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=__BUILD_VERSION__">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" id="siteHeader">
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="Beauty Salon home">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span class="brand-name">Beauty Salon<small>Beauty Studio · KL</small></span>
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
+        <a href="#services">Services</a>
+        <a href="#ask">Ask the studio</a>
+        <a href="#times">Best times</a>
+        <a href="#passes">Glow passes</a>
+        <a href="#team">Team</a>
+        <a href="#visit">Visit</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-button" type="button" id="openBookings" aria-label="My bookings"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M4 7h16M4 12h16M4 17h10"/></svg><span class="badge" id="bookingBadge" hidden>0</span></button>
+        <a class="button button-ink" href="#book">Book now</a>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Open navigation"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="chip chip-sage">Open today until 9 pm</span><span class="chip chip-peach" id="heroOpenChip">— slots open</span></p>
+          <h1>Book your glow in <em class="serif">three taps.</em></h1>
+          <p class="lead">Facials, lashes, brows, nails and body care for women — with prices, durations and open slots right here. No "how much ah?" messages, no waiting for a reply.</p>
+          <div class="hero-actions">
+            <a class="button button-ink" href="#book">Start booking</a>
+            <a class="button button-outline" href="#ask">Ask a question instead</a>
+          </div>
+          <ul class="trust-row" aria-label="Why clients book here">
+            <li><strong>4.9</strong><span>illustrative rating</span></li>
+            <li><strong>60+</strong><span>services with prices</span></li>
+            <li><strong>24/7</strong><span>availability online</span></li>
+          </ul>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-photo">
+            <img src="images/mod-hero-glow.webp" alt="A young woman with glowing skin laughing in a bright peach and sage studio" fetchpriority="high">
+          </div>
+          <div class="float-card float-one reveal">
+            <span class="float-icon">✨</span>
+            <div><strong>Glow Facial · 60 min</strong><span>RM 168 · 3 slots today</span></div>
+          </div>
+          <div class="float-card float-two reveal">
+            <span class="float-icon">💬</span>
+            <div><strong>Zero back-and-forth</strong><span>Your booking is pre-written</span></div>
+          </div>
+          <div class="blob blob-sage" aria-hidden="true"></div>
+          <div class="blob blob-lavender" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <!-- 3-tap quick booking -->
+      <div class="wrap">
+        <div class="quick-book reveal" id="quickBook" aria-label="Quick booking in three steps">
+          <div class="qb-step">
+            <span class="qb-num">1</span>
+            <div class="qb-field"><label for="qbService">Service</label><select id="qbService"><option value="">Choose a service</option></select></div>
+          </div>
+          <div class="qb-step">
+            <span class="qb-num">2</span>
+            <div class="qb-field"><label>Day</label><div class="date-strip" id="qbDays" role="tablist" aria-label="Choose a day"></div></div>
+          </div>
+          <div class="qb-step">
+            <span class="qb-num">3</span>
+            <div class="qb-field"><label>Time</label><div class="time-chips" id="qbTimes" role="group" aria-label="Choose a time"></div></div>
+          </div>
+          <div class="qb-go">
+            <div class="qb-summary" id="qbSummary">Pick a service to see price &amp; duration</div>
+            <button class="button button-peach" type="button" id="qbContinue">Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES BENTO -->
+    <section class="services" id="services">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><p class="eyebrow-text">Services &amp; prices</p><h2>Everything priced. <em class="serif">Nothing to ask.</em></h2></div>
+          <p class="lead">Filter by category, tap a card to add it to your booking. Durations are real so you can plan around your day.</p>
+        </div>
+        <div class="filters reveal" id="serviceFilters" role="tablist" aria-label="Service categories"></div>
+        <div class="bento reveal" id="serviceGrid"></div>
+        <p class="fine-print">Illustrative proposal prices in RM. Replace with the studio's live menu before launch.</p>
+      </div>
+    </section>
+
+    <!-- ASK THE STUDIO -->
+    <section class="ask" id="ask">
+      <div class="wrap ask-grid">
+        <div class="ask-copy reveal">
+          <p class="eyebrow-text">Ask the studio</p>
+          <h2>The questions you'd WhatsApp us, <em class="serif">answered instantly.</em></h2>
+          <p>Type anything — a price, "open on Sunday?", "parking", "can I come while pregnant?". It searches the studio's own answers, no chatbot guesswork.</p>
+          <div class="suggest" id="askSuggest">
+            <button type="button" data-q="lash extension price">Lash price?</button>
+            <button type="button" data-q="open sunday">Open on Sunday?</button>
+            <button type="button" data-q="parking">Parking</button>
+            <button type="button" data-q="cancel reschedule">Reschedule policy</button>
+            <button type="button" data-q="hijab private">Private rooms?</button>
+          </div>
+        </div>
+        <div class="ask-panel reveal">
+          <form class="ask-form" id="askForm" role="search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <input id="askInput" type="search" placeholder="Ask about a service, price, time or policy…" autocomplete="off" aria-label="Ask the studio">
+            <button class="button button-ink" type="submit">Ask</button>
+          </form>
+          <div class="ask-results" id="askResults" aria-live="polite">
+            <div class="ask-empty"><span>💬</span><p>Try "brow lamination", "last slot today" or "do you do bridal".</p></div>
+          </div>
+          <p class="ask-fallback">Didn't find it? <a href="https://wa.me/601158121239?text=Hi%20Beauty%20Salon%2C%20I%20have%20a%20question%3A%20" target="_blank" rel="noopener">WhatsApp the studio</a> — only the rare question reaches a human.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BEST TIMES -->
+    <section class="times" id="times">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><p class="eyebrow-text">Best times to come</p><h2>See when it's quiet, <em class="serif">book when it suits.</em></h2></div>
+          <p class="lead">A live view of how busy the studio is across the week, plus the open slots for each day. Pick a bar to jump straight to that day.</p>
+        </div>
+        <div class="times-grid reveal">
+          <div class="busy-card">
+            <div class="busy-head"><strong id="busyTitle">This week</strong><span class="legend"><i class="l-quiet"></i>Quiet <i class="l-mod"></i>Moderate <i class="l-busy"></i>Busy</span></div>
+            <div class="busy-chart" id="busyChart" role="img" aria-label="Busy hours chart for the week"></div>
+            <p class="busy-note" id="busyNote"></p>
+          </div>
+          <div class="slots-card">
+            <div class="busy-head"><strong id="slotsTitle">Open slots</strong><span id="slotsCount" class="chip chip-sage">—</span></div>
+            <div class="slots-list" id="slotsList"></div>
+            <p class="busy-note">Demo schedule generated in your browser. In production this reads from the studio's calendar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY STRIP -->
+    <section class="gallery" aria-label="Fresh from the studio">
+      <div class="wrap section-head reveal">
+        <div><p class="eyebrow-text">Fresh from the studio</p><h2>Real work, <em class="serif">real glow.</em></h2></div>
+      </div>
+      <div class="strip reveal" id="galleryStrip">
+        <figure><img src="images/mod-nails-pastel.webp" alt="Glossy pastel gel manicure beside a cup of matcha" loading="lazy"><figcaption>Pastel gel set · RM 88</figcaption></figure>
+        <figure><img src="images/mod-lash-brow.webp" alt="Lash extensions being applied in a bright studio" loading="lazy"><figcaption>Hybrid lashes · RM 198</figcaption></figure>
+        <figure><img src="images/facial-ritual.jpg" alt="A calm facial treatment" loading="lazy"><figcaption>Glow Facial · RM 168</figcaption></figure>
+        <figure><img src="images/mod-studio-interior.webp" alt="The bright studio interior with peach counter and sage arch" loading="lazy"><figcaption>The studio, KL</figcaption></figure>
+        <figure><img src="images/beauty-hero-hair-v3.webp" alt="A stylist shaping glossy waves" loading="lazy"><figcaption>Blow-out · RM 68</figcaption></figure>
+        <figure><img src="images/beauty-bridal-v2.webp" alt="Bridal makeup in progress" loading="lazy"><figcaption>Bridal glam · from RM 580</figcaption></figure>
+      </div>
+    </section>
+
+    <!-- GLOW PASSES -->
+    <section class="passes" id="passes">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><p class="eyebrow-text">Glow passes</p><h2>Come back often, <em class="serif">pay less.</em></h2></div>
+          <div class="toggle" role="group" aria-label="Pricing mode">
+            <button type="button" class="active" data-mode="single">Single visit</button>
+            <button type="button" data-mode="pass">Pass of 5</button>
+          </div>
+        </div>
+        <div class="pass-grid reveal">
+          <article class="pass-card">
+            <span class="chip chip-lavender">Skin</span>
+            <h3>Glow Facial</h3>
+            <p>Deep cleanse, enzyme peel, LED and a hydration mask. The studio's most booked service.</p>
+            <div class="pass-price"><strong data-single="168" data-pass="740">RM 168</strong><span data-single="per visit" data-pass="for 5 · save RM 100">per visit</span></div>
+            <button class="button button-outline" type="button" data-add="Glow Facial">Add to booking</button>
+          </article>
+          <article class="pass-card featured">
+            <span class="chip chip-peach">Most popular</span>
+            <h3>Lash Refill</h3>
+            <p>Keep your set full every 2–3 weeks. Includes a lash bath and aftercare spray.</p>
+            <div class="pass-price"><strong data-single="98" data-pass="420">RM 98</strong><span data-single="per visit" data-pass="for 5 · save RM 70">per visit</span></div>
+            <button class="button button-ink" type="button" data-add="Lash Refill">Add to booking</button>
+          </article>
+          <article class="pass-card">
+            <span class="chip chip-sage">Nails</span>
+            <h3>Gel Manicure</h3>
+            <p>Cuticle care, strengthening base and your choice of 200+ gel shades.</p>
+            <div class="pass-price"><strong data-single="88" data-pass="380">RM 88</strong><span data-single="per visit" data-pass="for 5 · save RM 60">per visit</span></div>
+            <button class="button button-outline" type="button" data-add="Gel Manicure">Add to booking</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM -->
+    <section class="team" id="team">
+      <div class="wrap team-grid">
+        <div class="team-photo reveal"><img src="images/mod-team-duo.webp" alt="Two smiling Beauty Salon therapists in sage uniforms in the studio" loading="lazy"></div>
+        <div class="team-copy reveal">
+          <p class="eyebrow-text">The team</p>
+          <h2>All-women team. <em class="serif">Private rooms.</em></h2>
+          <p>Every treatment room is closed and ours is a women-only studio, so you can take your hijab off, switch your phone off and actually relax.</p>
+          <ul class="team-list">
+            <li><span class="avatar">NA</span><div><strong>Nadia Azman</strong><span>Lead aesthetician · skin &amp; LED</span></div></li>
+            <li><span class="avatar">SL</span><div><strong>Sarah Lim</strong><span>Lash &amp; brow artist · 6 years</span></div></li>
+            <li><span class="avatar">FR</span><div><strong>Farah Razak</strong><span>Nail technician · gel &amp; art</span></div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section class="reviews" id="reviews">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><p class="eyebrow-text">Reviews</p><h2>What clients say <em class="serif">after the glow.</em></h2></div>
+          <div class="rating-tile"><strong>4.9</strong><div><span class="stars">★★★★★</span><small>Illustrative · connect Google reviews</small></div></div>
+        </div>
+        <div class="review-grid reveal">
+          <article class="review"><span class="stars">★★★★★</span><p>“Saw the price, picked Saturday 11 am, done. The confirmation came in two minutes. Why can't every salon do this?”</p><footer><span class="avatar">AM</span>Amira M. · Glow Facial</footer></article>
+          <article class="review"><span class="stars">★★★★★</span><p>“Love that I can check if they're busy before I go. I always pick the quiet Tuesday afternoon now.”</p><footer><span class="avatar">JT</span>Jasmine T. · Lash Refill</footer></article>
+          <article class="review"><span class="stars">★★★★★</span><p>“Private room, all-women, and my questions were already answered on the site. No awkward DMs.”</p><footer><span class="avatar">HN</span>Hana N. · Brow Lamination</footer></article>
+        </div>
+        <p class="fine-print">Sample reviews for proposal only. Replace with verified Google reviews.</p>
+      </div>
+    </section>
+
+    <!-- BOOKING -->
+    <section class="book" id="book">
+      <div class="wrap book-grid">
+        <div class="book-copy reveal">
+          <p class="eyebrow-text">Book</p>
+          <h2>Your booking, <em class="serif">pre-written.</em></h2>
+          <p>Add one or more services, pick a day and time, and we build the WhatsApp message for you. The studio replies "confirmed" and you're in.</p>
+          <div class="cart" id="cart">
+            <div class="cart-head"><strong>Your services</strong><span id="cartMeta">Nothing added yet</span></div>
+            <ul class="cart-list" id="cartList"></ul>
+            <div class="cart-total"><span>Estimated total</span><strong id="cartTotal">RM 0</strong></div>
+          </div>
+        </div>
+        <form class="book-form reveal" id="bookForm" novalidate>
+          <div class="form-grid">
+            <div class="field"><label for="name">Name</label><input id="name" name="name" required autocomplete="name" placeholder="Your name"></div>
+            <div class="field"><label for="phone">WhatsApp number</label><input id="phone" name="phone" required autocomplete="tel" inputmode="tel" placeholder="01x-xxx xxxx"></div>
+            <div class="field"><label for="date">Date</label><input id="date" name="date" type="date" required></div>
+            <div class="field"><label for="time">Time</label><select id="time" name="time" required><option value="">Choose a time</option></select></div>
+            <div class="field full"><label for="addService">Add a service</label><div class="add-row"><select id="addService"><option value="">Choose a service to add</option></select><button class="button button-outline" type="button" id="addServiceBtn">Add</button></div></div>
+            <div class="field full"><label for="notes">Notes</label><textarea id="notes" name="notes" placeholder="Allergies, pregnancy, first visit, a reference photo you'll send — anything we should know"></textarea></div>
+          </div>
+          <div class="form-actions">
+            <button class="button button-peach" type="submit">Send booking on WhatsApp</button>
+            <button class="button button-outline" type="button" id="copyBooking">Copy message</button>
+          </div>
+          <p class="form-status" id="formStatus" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- VISIT -->
+    <section class="visit" id="visit">
+      <div class="wrap visit-grid">
+        <div class="visit-copy reveal">
+          <p class="eyebrow-text">Visit</p>
+          <h2>Kampung Pandan, <em class="serif">Kuala Lumpur.</em></h2>
+          <address>2A Lorong Delapan, Kampung Pandan<br>55100 Kuala Lumpur</address>
+          <dl class="hours">
+            <div><dt>Mon – Fri</dt><dd>10:00 – 21:00</dd></div>
+            <div><dt>Sat – Sun</dt><dd>09:00 – 19:00</dd></div>
+            <div><dt>Public holidays</dt><dd>By appointment</dd></div>
+          </dl>
+          <p class="open-now chip chip-sage" id="openNow"></p>
+          <div class="hero-actions">
+            <a class="button button-ink" href="https://www.google.com/maps/dir/?api=1&amp;destination=3.144827966176431%2C101.74171596840188" target="_blank" rel="noopener">Directions</a>
+            <a class="button button-outline" href="https://wa.me/601158121239?text=Hi%20Beauty%20Salon%2C%20I%27d%20like%20to%20book." target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+        </div>
+        <div class="visit-map reveal"><iframe title="Map to Beauty Salon in Kampung Pandan, Kuala Lumpur" src="https://www.google.com/maps?q=3.144827966176431,101.74171596840188&amp;z=16&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+      </div>
+    </section>
+
+    <!-- NIAGOVA PITCH -->
+    <section class="pitch" id="for-owners" aria-labelledby="pitch-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><p class="eyebrow-text">For the studio owner · website by Niagova</p><h2 id="pitch-title">How many hours a month do you spend <em class="serif">typing "RM 168, 60 min"?</em></h2></div>
+          <p class="lead">Move the sliders. This is the time a beauty owner loses to price-and-slot messages, and what this web system hands back.</p>
+        </div>
+        <div class="calc reveal">
+          <div class="calc-inputs">
+            <label>Enquiry messages per day <output id="msgOut">35</output><input type="range" id="msgPerDay" min="5" max="120" value="35"></label>
+            <label>Minutes per reply (check diary, type, follow up) <output id="minOut">3</output><input type="range" id="minPerReply" min="1" max="10" value="3"></label>
+            <label>Share that are price / duration / "got slot?" <output id="pctOut">70%</output><input type="range" id="pctRoutine" min="30" max="95" value="70"></label>
+          </div>
+          <div class="calc-out">
+            <div><strong id="hoursLost">0</strong><span>hours a month spent replying by hand</span></div>
+            <div class="good"><strong id="hoursSaved">0</strong><span>hours handed back when the website answers routine questions</span></div>
+            <div><strong id="bookingsLost">0</strong><span>enquiries a month that go quiet while waiting (assumes 1 in 5)</span></div>
+          </div>
+        </div>
+        <div class="compare reveal">
+          <div class="compare-col before"><h3>Replying by hand</h3><ul><li>Each "how much?" interrupts a treatment.</li><li>Price lists as screenshots, out of date fast.</li><li>"Saturday free?" means checking, replying, chasing.</li><li>Clients book whoever answers first.</li></ul></div>
+          <div class="compare-col after"><h3>With this web system</h3><ul><li>Prices and durations live on every card.</li><li>Ask the studio answers policy questions instantly.</li><li>Busy-hours view and open slots, 24 hours a day.</li><li>Bookings arrive as one complete message ready to confirm.</li><li>Clients can see their own bookings on the site.</li></ul></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<section class="niagova-band" aria-labelledby="niagova-title">
+  <div class="niagova-band-inner">
+    <div>
+      <img src="images/niagova-logo-on-dark.svg" alt="Niagova" width="150" height="36" loading="lazy">
+      <p class="niagova-band-kicker">This demo website is built by Niagova</p>
+      <h2 id="niagova-title">Want a website like this for your business?</h2>
+      <p class="niagova-band-copy">Websites, booking systems and business apps for Malaysian SMEs. Every package and price is on niagova.com.</p>
+    </div>
+    <a class="niagova-band-cta" href="https://niagova.com/#pricing" target="_blank" rel="noopener">View Niagova packages <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+
+  <footer class="footer"><div class="wrap footer-row"><span>© <span id="year"></span> Beauty Salon · Demo website by <a href="https://niagova.com/" target="_blank" rel="noopener">Niagova</a>.</span><span>Photos, ratings, reviews and schedule are illustrative proposal content.</span></div></footer>
+
+  <!-- My bookings drawer -->
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-backdrop" id="drawerBackdrop"></div>
+    <aside class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+      <div class="drawer-head"><h3 id="drawerTitle">My bookings</h3><button class="icon-button" type="button" id="closeDrawer" aria-label="Close">✕</button></div>
+      <p class="drawer-note">Saved on this device only. Status updates in production come from the studio.</p>
+      <ul class="drawer-list" id="drawerList"></ul>
+      <div class="drawer-empty" id="drawerEmpty"><span>🗓️</span><p>No bookings yet. Your next one will appear here.</p></div>
+    </aside>
+  </div>
+
+  <div class="sticky-bar" id="stickyBar"><a href="#ask">Ask a question</a><a class="primary" href="#book">Book now</a></div>
+  <a class="wa-float" href="https://wa.me/601158121239?text=Hi%20Beauty%20Salon%2C%20I%27d%20like%20to%20book." target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.9 2.9 0 0 0-.9 2.2 5 5 0 0 0 1 2.6 11.4 11.4 0 0 0 4.4 3.9c1.6.7 2.3.7 3.1.6a2.6 2.6 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .2-1.2c-.1-.1-.3-.2-.5-.3Z"/></svg></a>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="index.js?v=__BUILD_VERSION__" defer></script>
+</body>
+</html>
